@@ -9,19 +9,23 @@ const Dashboard = () => {
   const [images, setImages] = React.useState([]);
   const [selectedImages, setSelectedImages] = React.useState([]);
   const [update, setUpdate] = React.useState(false);
+  const [saving, setSaving] = React.useState(false);
   const handleSelectedImages = data => {
-    console.log(data);
+    // console.log(data);
     setSelectedImages(data);
   };
 
   const handleUpload = async () => {
+    setSaving(true);
     let res = await uploadImages({ images: selectedImages });
     if (res.data.success === true) {
       // setImages(res.data.images);
       alert(res.data.message);
       setUpdate(true);
+      setSaving(false);
     } else {
       alert('No Images Found');
+      setSaving(false);
     }
   };
 
@@ -84,9 +88,20 @@ const Dashboard = () => {
               </p>
               <Selectimage selectedImages={handleSelectedImages} />
               <br />
-              <button onClick={handleUpload} className="btn btn-success">
-                Upload Images
-              </button>
+              {saving === true ? (
+                <button class="btn btn-success" type="button" disabled>
+                  <span
+                    class="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="sr-only">Loading...</span>
+                </button>
+              ) : (
+                <button onClick={handleUpload} className="btn btn-success">
+                  Upload Images
+                </button>
+              )}
             </Paper>
           </Grid>
         </Container>

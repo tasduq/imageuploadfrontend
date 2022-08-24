@@ -5,14 +5,14 @@ let url = 'https://imageuploadbackend1.herokuapp.com';
 const uploadImages = async data => {
   let res = await axios.post(`${url}/api/images/postimages`, data);
 
-  console.log(res);
+  // console.log(res);
   return res;
 };
 
 const getImages = async data => {
   let res = await axios.get(`${url}/api/images/getimages`);
 
-  console.log(res);
+  // console.log(res);
   return res;
 };
 
