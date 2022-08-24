@@ -1,5 +1,6 @@
 import axios from 'axios';
-let url = 'http://localhost:3001';
+// let url = 'http://localhost:3001';
+let url = 'https://imageuploadbackend1.herokuapp.com';
 
 const uploadImages = async data => {
   let res = await axios.post(`${url}/api/images/postimages`, data);
